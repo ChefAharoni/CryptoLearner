@@ -1,0 +1,183 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --bg-color: #f8f9fa;
+    --cell-bg: #ffffff;
+    --cell-border: #bdc3c7;
+    --text-color: #333333;
+    --highlight-color: #f1c40f;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 0.5rem 0;
+}
+
+header p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+h2 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cell-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.info-box {
+    background-color: #e8f4f8;
+    border-left: 4px solid var(--secondary-color);
+    padding: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.warning {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#status-panel {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+#status-panel h3 {
+    margin-top: 0;
+    color: var(--highlight-color);
+}
+
+#status-panel a {
+    color: #add8e6;
+    text-decoration: underline;
+}
+
+.grid-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.grid-wrapper h4 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.hex-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    grid-template-rows: repeat(4, 60px);
+    gap: 4px;
+    background-color: var(--cell-border);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.hex-cell {
+    background-color: var(--cell-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+.hex-cell.changed {
+    background-color: var(--highlight-color);
+    color: #000;
+}
+
+.progress-info {
+    text-align: center;
+    margin-top: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.round-key-style .hex-cell {
+    background-color: #e8f8f5;
+    border-color: #1abc9c;
+    color: #16a085;
+}
