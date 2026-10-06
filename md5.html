@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD5 Hash Visualizer | CryptoLearner</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .register-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        .register-box {
+            background: var(--cell-border);
+            padding: 2px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .register-box h5 {
+            margin: 5px 0;
+            color: var(--primary-color);
+        }
+        .register-val {
+            background: var(--cell-bg);
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.5s ease;
+        }
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .word-cell {
+            background: var(--cell-bg);
+            border: 1px solid var(--cell-border);
+            padding: 5px;
+            text-align: center;
+            transition: background-color 0.5s ease;
+        }
+        .word-cell.active {
+            background-color: var(--highlight-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MD5 Hash Visualizer</h1>
+        <p>A step-by-step educational tool for learning the Message-Digest 5 Algorithm</p>
+    </header>
+
+    <main>
+        <a href="index.html" style="display: inline-block; margin-bottom: 1rem; color: var(--secondary-color); text-decoration: none; font-weight: bold;">&larr; Back to Dashboard</a>
+        
+        <section id="config-section">
+            <h2>1. Configuration</h2>
+            <div class="form-group">
+                <label for="message">Input Message:</label>
+                <input type="text" id="message" value="hello" placeholder="Enter message to hash">
+            </div>
+            
+            <div class="info-box">
+                <strong>MD5</strong> is a widely known legacy cryptographic hash function that produces a 128-bit hash value. While now considered cryptographically broken, its structure of 4 rounds (64 operations) and simple non-linear functions makes it an excellent learning tool for basic hashing principles.
+            </div>
+
+            <button id="start-btn" style="margin-top: 1rem;">Start Visualization</button>
+        </section>
+
+        <section id="visualization-section" style="display: none;">
+            <div class="controls">
+                <button id="prev-btn" disabled>&laquo; Prev Step</button>
+                <button id="play-pause-btn">Play Animation</button>
+                <button id="next-btn">Next Step &raquo;</button>
+                <select id="jump-select">
+                    <option value="">Jump to Step...</option>
+                    <option value="padding">Padding/Prep</option>
+                    <option value="0">Op 0 (Round 1)</option>
+                    <option value="1">Op 1</option>
+                    <option value="2">Op 2</option>
+                    <option value="63">Op 63 (Final)</option>
+                    <option value="hash">Intermediate Hash Update</option>
+                </select>
+                <div class="speed-control" style="display: flex; align-items: center; gap: 0.5rem; border-left: 2px solid #ccc; padding-left: 1rem; margin-left: 0.5rem;">
+                    <label for="speed-slider" style="margin: 0;">Speed:</label>
+                    <input type="range" id="speed-slider" min="0.25" max="3" step="0.25" value="0.5">
+                    <span id="speed-display" style="font-weight: bold;">0.50x</span>
+                </div>
+            </div>
+
+            <div id="status-panel">
+                <h3 id="current-step-name">Step Name</h3>
+                <p id="current-step-desc">Description goes here.</p>
+                <a href="#" id="learn-more-link" target="_blank">Learn more about this step</a>
+            </div>
+
+            <div class="grid-wrapper">
+                <h4>Working Variables (A, B, C, D)</h4>
+                <div class="register-grid">
+                    <div class="register-box"><h5>A</h5><div id="reg-a" class="register-val">00000000</div></div>
+                    <div class="register-box"><h5>B</h5><div id="reg-b" class="register-val">00000000</div></div>
+                    <div class="register-box"><h5>C</h5><div id="reg-c" class="register-val">00000000</div></div>
+                    <div class="register-box"><h5>D</h5><div id="reg-d" class="register-val">00000000</div></div>
+                </div>
+            </div>
+
+            <div class="grid-wrapper">
+                <h4>Message Block M[0...15]</h4>
+                <div id="w-grid" class="word-grid">
+                    <!-- 16 cells populated by JS -->
+                </div>
+            </div>
+            
+            <div class="progress-info">
+                Chunk <span id="chunk-counter">1</span> of <span id="total-chunks">1</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/md5-core.js"></script>
+    <script src="js/md5-ui.js"></script>
+</body>
+</html>
