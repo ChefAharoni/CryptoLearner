@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-128 Encryption Visualizer | CryptoLearner</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>AES-128 Encryption Visualizer</h1>
+        <p>A step-by-step educational tool for learning Advanced Encryption Standard</p>
+    </header>
+
+    <main>
+        <a href="index.html" style="display: inline-block; margin-bottom: 1rem; color: var(--secondary-color); text-decoration: none; font-weight: bold;">&larr; Back to Dashboard</a>
+        <section id="config-section">
+            <h2>1. Configuration</h2>
+            <div class="form-group">
+                <label for="message">Message (Plaintext):</label>
+                <input type="text" id="message" value="hello crypto" placeholder="Enter message to encrypt">
+            </div>
+            
+            <div class="form-group">
+                <label for="key">Encryption Key (16 bytes max):</label>
+                <input type="text" id="key" value="secretkey123456" placeholder="Enter secret key">
+            </div>
+
+            <div class="form-group">
+                <label for="mode">Block Cipher Mode:</label>
+                <select id="mode">
+                    <option value="ECB">ECB (Electronic Codebook)</option>
+                    <option value="CBC">CBC (Cipher Block Chaining)</option>
+                </select>
+                <div id="mode-explanation" class="info-box">
+                    <strong>ECB Mode:</strong> The simplest encryption mode. Each block is encrypted independently. 
+                    <br><span class="warning">Weakness:</span> Identical plaintext blocks produce identical ciphertext blocks, revealing patterns in the data (e.g., the famous ECB Penguin).
+                </div>
+            </div>
+
+            <div class="form-group" id="iv-group" style="display: none;">
+                <label for="iv">Initialization Vector (IV):</label>
+                <input type="text" id="iv" value="randomiv98765432" placeholder="Enter IV">
+            </div>
+
+            <button id="start-btn">Start Visualization</button>
+        </section>
+
+        <section id="visualization-section" style="display: none;">
+            <div class="controls">
+                <button id="prev-btn" disabled>&laquo; Prev Step</button>
+                <button id="play-pause-btn">Play Animation</button>
+                <button id="next-btn">Next Step &raquo;</button>
+                <button id="skip-block-btn">Skip to Next Block</button>
+                <select id="jump-select">
+                    <option value="">Jump to Round...</option>
+                    <option value="0">Round 0 (Initial)</option>
+                    <option value="1">Round 1</option>
+                    <option value="2">Round 2</option>
+                    <option value="3">Round 3</option>
+                    <option value="10">Round 10 (Final)</option>
+                </select>
+                <div class="speed-control" style="display: flex; align-items: center; gap: 0.5rem; border-left: 2px solid #ccc; padding-left: 1rem; margin-left: 0.5rem;">
+                    <label for="speed-slider" style="margin: 0;">Speed:</label>
+                    <input type="range" id="speed-slider" min="0.25" max="3" step="0.25" value="0.5">
+                    <span id="speed-display" style="font-weight: bold;">0.50x</span>
+                </div>
+            </div>
+
+            <div id="status-panel">
+                <h3 id="current-step-name">Step Name</h3>
+                <p id="current-step-desc">Description goes here.</p>
+                <a href="#" id="learn-more-link" target="_blank">Learn more about this step</a>
+            </div>
+
+            <div class="grid-container">
+                <div class="grid-wrapper">
+                    <h4>Current State (Hex)</h4>
+                    <div id="state-grid" class="hex-grid">
+                        <!-- 4x4 cells populated by JS -->
+                    </div>
+                </div>
+                <div class="grid-wrapper">
+                    <h4>Current State (ASCII)</h4>
+                    <div id="ascii-grid" class="hex-grid">
+                        <!-- 4x4 cells populated by JS -->
+                    </div>
+                </div>
+                <div class="grid-wrapper" id="round-key-wrapper" style="display: none;">
+                    <h4 id="round-key-title">Round Key Applied (Hex)</h4>
+                    <div id="round-key-grid" class="hex-grid round-key-style">
+                        <!-- 4x4 cells populated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-info">
+                Block <span id="block-counter">1</span> of <span id="total-blocks">1</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/aes-core.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>
